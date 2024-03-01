@@ -1,5 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quiz/resources/authentication_methods.dart';
+import 'package:quiz/screens/home_screen.dart';
 import 'package:quiz/screens/user_account/forgot_password.dart';
 import 'package:quiz/screens/user_account/sign_up.dart';
 import '../../utils/colors.dart';
@@ -15,8 +21,18 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _userController = TextEditingController();
   final _passwordController = TextEditingController();
+  AuthenticationMethods authenticationMethods = AuthenticationMethods();
 
   bool _isPasswordVisible = false;
+
+  String email = "", password = "";
+
+  @override
+  void dispose() {
+    _userController.text;
+    _passwordController.text;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       SizedBox(
                         width: 270.0,
-                        child: TextField(
+                        child: TextFormField(
                           controller: _userController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
@@ -115,9 +131,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       SizedBox(
                         width: 270.0,
-                        child: TextField(
+                        child: TextFormField(
                           controller: _passwordController,
-                          obscureText: _isPasswordVisible,
+                          obscureText: !_isPasswordVisible,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
@@ -141,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             _isPasswordVisible = !_isPasswordVisible;
                           });
                         },
-                        child: _isPasswordVisible
+                        child: !_isPasswordVisible
                             ? SvgPicture.asset(
                                 "assets/icons/hide.svg",
                                 height: 20.0,
@@ -173,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         // forgot password function
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (ctx) => ForgotPasswordScreen(),
+                            builder: (ctx) => const ForgotPasswordScreen(),
                           ),
                         );
                       },
@@ -191,8 +207,33 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 70),
                 // sign in button
                 GestureDetector(
-                  onTap: () {
-                    // sign in function
+                  onTap: () async {
+                    String output = await authenticationMethods.signInUser(
+                      userEmail: _userController.text,
+                      userPassword: _passwordController.text,
+                    );
+
+                    if (output == "success") {
+                      // doing next function
+                      log("login success");
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (ctx) => const QuizHomeScreen(),
+                        ),
+                      );
+                    } else {
+                      final snackBar = SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Colors.teal,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        content: Text(output),
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
                   },
                   child: Container(
                     height: 70.0,
@@ -264,7 +305,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () {
                         // sign up page
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (context) {
                               return const SignUpScreen();

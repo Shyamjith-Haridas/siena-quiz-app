@@ -1,5 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quiz/resources/authentication_methods.dart';
+import 'package:quiz/screens/home_screen.dart';
 import 'package:quiz/screens/user_account/login_screen.dart';
 import 'package:quiz/utils/colors.dart';
 import 'package:quiz/utils/size_config.dart';
@@ -12,12 +16,23 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  String name = "", email = "", password = "";
+
   // controller
-  final _createUserController = TextEditingController();
-  final _createEmailController = TextEditingController();
-  final _createPasswordController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  AuthenticationMethods authenticationMethods = AuthenticationMethods();
 
   bool _isPasswordVisible = false;
+
+  @override
+  void dispose() {
+    _usernameController.text;
+    _emailController.text;
+    _passwordController.text;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +85,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       SizedBox(
                         width: 270.0,
-                        child: TextField(
-                          controller: _createUserController,
+                        child: TextFormField(
+                          controller: _usernameController,
                           keyboardType: TextInputType.name,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
@@ -116,8 +131,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       SizedBox(
                         width: 270.0,
-                        child: TextField(
-                          controller: _createEmailController,
+                        child: TextFormField(
+                          controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
@@ -162,9 +177,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       SizedBox(
                         width: 270.0,
-                        child: TextField(
-                          controller: _createPasswordController,
-                          obscureText: _isPasswordVisible,
+                        child: TextFormField(
+                          controller: _passwordController,
+                          obscureText: !_isPasswordVisible,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
@@ -190,7 +205,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                         child: _isPasswordVisible
                             ? SvgPicture.asset(
-                                "assets/icons/hide.svg",
+                                "assets/icons/visibility.svg",
                                 height: 20.0,
                                 colorFilter: const ColorFilter.mode(
                                   grayText,
@@ -198,7 +213,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               )
                             : SvgPicture.asset(
-                                "assets/icons/visibility.svg",
+                                "assets/icons/hide.svg",
                                 height: 20.0,
                                 colorFilter: const ColorFilter.mode(
                                   grayText,
@@ -213,8 +228,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 40),
                 // sign in button
                 GestureDetector(
-                  onTap: () {
-                    // sign in function
+                  onTap: () async {
+                    String output = await authenticationMethods.signUpUser(
+                      userName: _usernameController.text,
+                      userEmail: _emailController.text,
+                      userPassword: _passwordController.text,
+                    );
+
+                    if (output == "success") {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (ctx) => const QuizHomeScreen(),
+                        ),
+                      );
+                    } else {
+                      final snackBar = SnackBar(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        backgroundColor: Colors.teal,
+                        behavior: SnackBarBehavior.floating,
+                        content: Text(output),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
                   },
                   child: Container(
                     height: 70.0,
@@ -286,7 +323,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     GestureDetector(
                       onTap: () {
                         // login page
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (context) {
                               return const LoginScreen();
