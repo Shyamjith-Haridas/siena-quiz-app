@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/home_screen.dart';
-//import 'package:lottie/lottie.dart';
-//import 'package:quiz/screens/splash/onboarding_screens/onboarding.dart';
-import 'package:quiz/screens/user_account/login_screen.dart';
+import 'package:lottie/lottie.dart';
+import 'package:quiz/screens/home/widget/bottom_nav.dart';
+import 'package:quiz/screens/splash/onboarding_screens/onboarding.dart';
 
 class QuizSplashScreen extends StatefulWidget {
   const QuizSplashScreen({super.key});
@@ -19,7 +18,7 @@ class _QuizSplashScreenState extends State<QuizSplashScreen>
   void gotoOnboardScreen() {
     Timer(
       const Duration(
-        seconds: 3,
+        milliseconds: 5700,
       ),
       () {
         Navigator.of(context).pushReplacement(
@@ -48,9 +47,9 @@ class _QuizSplashScreenState extends State<QuizSplashScreen>
             ),
           );
         } else if (user.hasData) {
-          return const QuizHomeScreen();
+          return const BottomNavScreen();
         } else {
-          return const LoginScreen();
+          return const OnBoardingScreen();
         }
       },
     );
@@ -64,19 +63,37 @@ class _QuizSplashScreenState extends State<QuizSplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        // child: SizedBox(
-        //   height: 180,
-        //   width: 250,
-        //   child: Lottie.asset(
-        //     "assets/animations/welcome_animation.json",
-        //     // controller: _animationController,
-        //   ),
-        // ),
-        child: Text(
-          "QUIZIFY",
-          style: TextStyle(),
+    final screenSize = MediaQuery.of(context).size;
+
+    return Scaffold(
+      // backgroundColor: Color.fromRGBO(30, 41, 37, 1),
+      backgroundColor: Colors.black.withOpacity(0.2),
+      body: SizedBox(
+        height: screenSize.height,
+        width: screenSize.width,
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Lottie.asset(
+                "assets/animations/welcome_image.json",
+                // controller: AnimationController(
+                //   vsync: this,
+                //   duration: Duration(
+                //     seconds: 10,
+                //   ),
+                // ),
+              ),
+            ),
+            // Positioned(
+            //   bottom: 12.0,
+            //   left: screenSize.width / 2 - 20,
+            //   child: SpinKitThreeBounce(
+            //     size: 28.0,
+            //     color: Colors.white,
+            //   ),
+            // ),
+          ],
         ),
       ),
     );

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quiz/resources/authentication_methods.dart';
-import 'package:quiz/screens/home_screen.dart';
+import 'package:quiz/screens/home/widget/bottom_nav.dart';
 import 'package:quiz/screens/user_account/login_screen.dart';
 import 'package:quiz/utils/colors.dart';
 import 'package:quiz/utils/size_config.dart';
@@ -238,7 +238,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     if (output == "success") {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (ctx) => const QuizHomeScreen(),
+                          builder: (ctx) => BottomNavScreen(),
                         ),
                       );
                     } else {
@@ -275,8 +275,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 20),
                 // google sign in button
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     // sign in function
+                    await authenticationMethods.signInWithGoogle(context);
                   },
                   child: Container(
                     height: 70.0,

@@ -5,7 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quiz/resources/authentication_methods.dart';
-import 'package:quiz/screens/home_screen.dart';
+import 'package:quiz/screens/home/widget/bottom_nav.dart';
 import 'package:quiz/screens/user_account/forgot_password.dart';
 import 'package:quiz/screens/user_account/sign_up.dart';
 import '../../utils/colors.dart';
@@ -219,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (ctx) => const QuizHomeScreen(),
+                          builder: (ctx) => const BottomNavScreen(),
                         ),
                       );
                     } else {
@@ -257,7 +257,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 // google sign in button
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     // sign in function
                   },
                   child: Container(

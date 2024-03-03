@@ -1,9 +1,18 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:quiz/resources/user_data_cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:quiz/screens/home/home_screen.dart';
 
 class AuthenticationMethods {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  GoogleSignIn googleSignIn = GoogleSignIn();
+
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  CloudFireStoreClass cloudFireStoreClass = CloudFireStoreClass();
 
   // sign up
   Future<String> signUpUser({
@@ -23,6 +32,13 @@ class AuthenticationMethods {
           email: userEmail,
           password: userPassword,
         );
+
+        // upload user data to firestore
+        await cloudFireStoreClass.uploadUserDataToDatabase(
+          userName: userName,
+          userEmail: userEmail,
+        );
+
         output = "success";
       } on FirebaseAuthException catch (e) {
         output = e.message.toString();
@@ -78,42 +94,90 @@ class AuthenticationMethods {
     return output;
   }
 
-  // --------------------------------------------
-  // checking if the user is valid or not
-  // result : failed to get those data from firebase
-  // because of it's security reasons.
+  // sign in with google account
+  Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
 
-  // forgot password
-  // Future<String> userForgotPassword({required String userEmail}) async {
-  //   userEmail.trim();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
 
-  //   String output = "Something went wrong..";
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
+        );
 
-  //   if (userEmail != "") {
-  //     bool isEmailValid = await doesEmailExistOrNot(userEmail: userEmail);
-  //     print(isEmailValid);
-  //     if (isEmailValid) {
-  //       //   try {
-  //       //   await firebaseAuth.sendPasswordResetEmail(email: userEmail);
-  //       //   output = "success";
-  //       // } on FirebaseAuthException catch (e) {
-  //       //   output = e.message.toString();
-  //       // }
-  //       log("email is valid");
-  //     } else {
-  //       log("email is invalid...");
-  //     }
-  //   } else {
-  //     output = "Please fill up everything";
-  //   }
-  //   return output;
-  // }
+        UserCredential signInResult =
+            await firebaseAuth.signInWithCredential(credential);
+        User? userDetails = signInResult.user;
 
-  // check if the email is present or not in firebase
+        if (signInResult != null) {
+          firebaseFirestore
+              .collection("userdata")
+              .doc(firebaseAuth.currentUser!.uid)
+              .set(
+            {
+              "username": userDetails!.displayName,
+              "email": userDetails.email,
+              "imgUrl": userDetails.photoURL,
+            },
+          );
+        } else {
+          log("database upload is failed..!");
+        }
+
+        // home
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (ctx) => const QuizHomeScreen(),
+          ),
+        );
+      } else {}
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+}
+
+/*
+  checking if the user is valid or not
+  result : failed to get those data from firebase
+  because of it's security reasons.
+
+  forgot password
+  Future<String> userForgotPassword({required String userEmail}) async {
+    userEmail.trim();
+
+    String output = "Something went wrong..";
+
+    if (userEmail != "") {
+      bool isEmailValid = await doesEmailExistOrNot(userEmail: userEmail);
+      print(isEmailValid);
+      if (isEmailValid) {
+          try {
+          await firebaseAuth.sendPasswordResetEmail(email: userEmail);
+          output = "success";
+        } on FirebaseAuthException catch (e) {
+          output = e.message.toString();
+        }
+        log("email is valid");
+      } else {
+        log("email is invalid...");
+      }
+    } else {
+      output = "Please fill up everything";
+    }
+    return output;
+  }
+
+  check if the email is present or not in firebase
   Future<bool> doesEmailExistOrNot({required String userEmail}) async {
     try {
       var isEmailExists =
-          // ignore: deprecated_member_use
+         // ignore: deprecated_member_use
           await firebaseAuth.fetchSignInMethodsForEmail(userEmail);
 
       List<String> toList = isEmailExists.toList();
@@ -128,4 +192,4 @@ class AuthenticationMethods {
       return false;
     }
   }
-}
+*/
