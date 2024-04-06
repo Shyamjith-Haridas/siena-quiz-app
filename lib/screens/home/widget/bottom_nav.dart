@@ -1,9 +1,10 @@
-import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:quiz/screens/home/home_screen.dart';
-import 'package:quiz/screens/home/profile.dart';
+import 'package:quiz/screens/profile/profile.dart';
 import 'package:quiz/screens/home/quiz_stats.dart';
-import 'package:quiz/screens/home/settings.dart';
+import 'package:quiz/screens/settings/settings.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
@@ -15,48 +16,47 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int selectedIndex = 0;
 
-  List<TabItem> items = [
-    TabItem(
-      icon: Icons.home,
-      title: 'Home',
-    ),
-    TabItem(
-      icon: Icons.align_vertical_bottom,
-      title: 'Stats',
-    ),
-    TabItem(
-      icon: Icons.settings,
-      title: 'Settings',
-    ),
-    TabItem(
-      icon: Icons.person,
-      title: 'Profile',
-    ),
-  ];
-
   final screensList = <Widget>[
-    QuizHomeScreen(),
-    QuizAppStatsScreen(),
     QuizAppSettingsScreen(),
+    QuizAppStatsScreen(),
+    QuizHomeScreen(),
     QuizAppProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.black,
+      backgroundColor: Color.fromRGBO(49, 49, 77, 1),
       body: screensList.elementAt(selectedIndex),
-      bottomNavigationBar: BottomBarDefault(
-        items: items,
-        indexSelected: selectedIndex,
+      bottomNavigationBar: CurvedNavigationBar(
         onTap: (newIndex) {
           setState(() {
             selectedIndex = newIndex;
           });
         },
+        index: selectedIndex,
+        color: Colors.black,
         backgroundColor: Colors.white,
-        color: Colors.black.withOpacity(0.9),
-        colorSelected: Colors.lightBlue,
+        //backgroundColor: Color.fromRGBO(240, 235, 229, 1),
+        animationDuration: Duration(milliseconds: 500),
+        items: [
+          Icon(
+            Icons.home,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.bar_chart,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.settings,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.person,
+            color: Colors.white,
+          ),
+        ],
       ),
     );
   }

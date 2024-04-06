@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         fontFamily: "Mulish",
+        scaffoldBackgroundColor: Color.fromRGBO(220, 230, 255, 1),
       ),
       home: const QuizSplashScreen(),
       debugShowCheckedModeBanner: false,

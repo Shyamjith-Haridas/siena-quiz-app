@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class QuizHomeScreen extends StatelessWidget {
   const QuizHomeScreen({super.key});
@@ -16,86 +17,233 @@ class QuizHomeScreen extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                height: 230,
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade300,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(62),
-                    bottomRight: Radius.circular(62),
-                  ),
+                height: screenSize.height,
+                width: screenSize.width,
+                padding: const EdgeInsets.only(
+                  left: 20.0,
+                  right: 20.0,
                 ),
-                child: Padding(
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(49, 49, 77, 1),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 110),
+                    Text(
+                      "Challenge your friends",
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      "invite your friends to play quiz game",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    MaterialButton(
+                      textColor: Colors.black,
+                      color: Color.fromRGBO(240, 235, 229, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        "Start Now",
+                        style: TextStyle(fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 32,
+                left: 225,
+                child: SizedBox(
+                  height: 300,
+                  width: 230,
+                  child: Lottie.asset("assets/animations/anime.json"),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: 500,
+                  width: screenSize.width,
                   padding: const EdgeInsets.only(
-                    top: 24,
-                    left: 20,
-                    right: 20,
+                    left: 20.0,
+                    right: 20.0,
+                    top: 40.0,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  decoration: BoxDecoration(
+                    // color: Color.fromRGBO(240, 235, 229, 1),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                    ),
+                  ),
+                  child: Column(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Explore Quizzez",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              "VIEW ALL",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // quiz catelog
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "Good morning",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
+                          Material(
+                            elevation: 3,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 170,
+                              width: 175,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(247, 246, 242, 1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.sports_basketball,
+                                    size: 48,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    "Sports",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                          Text(
-                            "Alexa !",
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                          Material(
+                            elevation: 3,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 170,
+                              width: 175,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(247, 246, 242, 1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.sports_basketball,
+                                    size: 48,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    "Sports",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage: NetworkImage(
-                            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3744&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,"),
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 140,
-                left: 30,
-                child: Container(
-                  height: 160,
-                  width: 350,
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    color: Colors.red.shade400,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 10,
-                        left: -18,
-                        child: SizedBox(
-                          height: 180,
-                          child: Image.asset("assets/images/phone_hand.png"),
-                        ),
-                      ),
-                      Positioned(
-                        right: 20,
-                        bottom: 10,
-                        child: Container(
-                          height: 55,
-                          width: 55,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Material(
+                            elevation: 3,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 170,
+                              width: 175,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(247, 246, 242, 1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.sports_basketball,
+                                    size: 48,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    "Sports",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          child: Icon(Icons.arrow_forward),
-                        ),
+                          Material(
+                            elevation: 3,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 170,
+                              width: 175,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(247, 246, 242, 1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.sports_basketball,
+                                    size: 48,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    "Sports",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
