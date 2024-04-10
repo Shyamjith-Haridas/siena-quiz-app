@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:quiz/screens/home/home_screen.dart';
 import 'package:quiz/screens/profile/profile.dart';
-import 'package:quiz/screens/home/quiz_stats.dart';
+import 'package:quiz/screens/quiz_status/quiz_stats.dart';
 import 'package:quiz/screens/settings/settings.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
@@ -17,9 +16,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   int selectedIndex = 0;
 
   final screensList = <Widget>[
-    QuizAppSettingsScreen(),
-    QuizAppStatsScreen(),
     QuizHomeScreen(),
+    QuizAppStatsScreen(),
+    QuizAppSettingsScreen(),
     QuizAppProfileScreen(),
   ];
 

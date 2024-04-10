@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:quiz/screens/home/widget/bottom_nav.dart';
+import 'package:quiz/bottom_nav.dart';
 import 'package:quiz/screens/splash/onboarding_screens/onboarding.dart';
 
 class QuizSplashScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _QuizSplashScreenState extends State<QuizSplashScreen>
   void gotoOnboardScreen() {
     Timer(
       const Duration(
-        milliseconds: 5700,
+        milliseconds: 4535,
       ),
       () {
         Navigator.of(context).pushReplacement(
@@ -66,7 +66,6 @@ class _QuizSplashScreenState extends State<QuizSplashScreen>
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      // backgroundColor: Color.fromRGBO(30, 41, 37, 1),
       backgroundColor: Colors.black.withOpacity(0.2),
       body: SizedBox(
         height: screenSize.height,
@@ -77,22 +76,8 @@ class _QuizSplashScreenState extends State<QuizSplashScreen>
               alignment: Alignment.center,
               child: Lottie.asset(
                 "assets/animations/welcome_image.json",
-                // controller: AnimationController(
-                //   vsync: this,
-                //   duration: Duration(
-                //     seconds: 10,
-                //   ),
-                // ),
               ),
             ),
-            // Positioned(
-            //   bottom: 12.0,
-            //   left: screenSize.width / 2 - 20,
-            //   child: SpinKitThreeBounce(
-            //     size: 28.0,
-            //     color: Colors.white,
-            //   ),
-            // ),
           ],
         ),
       ),

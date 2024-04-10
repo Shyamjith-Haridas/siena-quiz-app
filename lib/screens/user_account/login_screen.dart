@@ -1,15 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quiz/resources/authentication_methods.dart';
-import 'package:quiz/screens/home/widget/bottom_nav.dart';
+import 'package:quiz/bottom_nav.dart';
 import 'package:quiz/screens/user_account/forgot_password.dart';
 import 'package:quiz/screens/user_account/sign_up.dart';
+import 'package:quiz/utils/app_dimensions.dart';
 import '../../utils/colors.dart';
-import '../../utils/size_config.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -36,296 +35,310 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    double width = SizeConfig.screenW!;
-    double height = SizeConfig.screenH!;
+    final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: blackBG,
       body: SingleChildScrollView(
         child: SizedBox(
-          height: height,
-          width: width,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  "Welcome !",
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: whiteText,
-                    fontWeight: FontWeight.bold,
-                  ),
+          height: AppDimensions.screenHeight,
+          width: AppDimensions.screenWidth,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: AppDimensions.height100),
+              Text(
+                "Welcome !",
+                style: TextStyle(
+                  fontSize: AppDimensions.fontSize40,
+                  color: whiteText,
+                  fontWeight: FontWeight.w800,
                 ),
-                const SizedBox(height: 10),
-                const Text(
-                  "Please sign in to your account",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: grayText,
-                    fontWeight: FontWeight.bold,
-                  ),
+              ),
+              SizedBox(height: AppDimensions.height12),
+              Text(
+                "Please sign in to your account",
+                style: TextStyle(
+                  fontSize: AppDimensions.fontSize18,
+                  color: grayText,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(height: 60),
-                // email field
-                Container(
-                  height: 70.0,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 10.0,
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  decoration: BoxDecoration(
-                    color: blackTextFild,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 270.0,
-                        child: TextFormField(
-                          controller: _userController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Username",
-                            hintStyle: TextStyle(
-                              fontSize: 14,
-                              color: grayText,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: whiteText,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      SvgPicture.asset(
-                        "assets/icons/user.svg",
-                        height: 20.0,
-                        colorFilter: const ColorFilter.mode(
-                          grayText,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // password field
-                Container(
-                  height: 70.0,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 10.0,
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  decoration: BoxDecoration(
-                    color: blackTextFild,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 270.0,
-                        child: TextFormField(
-                          controller: _passwordController,
-                          obscureText: !_isPasswordVisible,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Password",
-                            hintStyle: TextStyle(
-                              fontSize: 14,
-                              color: grayText,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: whiteText,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
-                          });
-                        },
-                        child: !_isPasswordVisible
-                            ? SvgPicture.asset(
-                                "assets/icons/hide.svg",
-                                height: 20.0,
-                                colorFilter: const ColorFilter.mode(
-                                  grayText,
-                                  BlendMode.srcIn,
-                                ),
-                              )
-                            : SvgPicture.asset(
-                                "assets/icons/visibility.svg",
-                                height: 20.0,
-                                colorFilter: const ColorFilter.mode(
-                                  grayText,
-                                  BlendMode.srcIn,
-                                ),
-                              ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10),
-                // forgot password
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 25.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        // forgot password function
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (ctx) => const ForgotPasswordScreen(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        "Forgot Password?",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: grayText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 70),
-                // sign in button
-                GestureDetector(
-                  onTap: () async {
-                    String output = await authenticationMethods.signInUser(
-                      userEmail: _userController.text,
-                      userPassword: _passwordController.text,
-                    );
+              ),
+              SizedBox(height: AppDimensions.height60),
 
-                    if (output == "success") {
-                      // doing next function
-                      log("login success");
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (ctx) => const BottomNavScreen(),
-                        ),
-                      );
-                    } else {
-                      final snackBar = SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.teal,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        content: Text(output),
-                      );
-
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }
-                  },
-                  child: Container(
-                    height: 70.0,
-                    width: width,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                    decoration: BoxDecoration(
-                      color: blueButton,
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: const Text(
-                      "Sign in",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: whiteText,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
+              // email field
+              Container(
+                height: AppDimensions.height70,
+                margin: EdgeInsets.symmetric(
+                  horizontal: AppDimensions.pHorizontal20,
                 ),
-                const SizedBox(height: 20),
-                // google sign in button
-                GestureDetector(
-                  onTap: () async {
-                    // sign in function
-                  },
-                  child: Container(
-                    height: 70.0,
-                    width: width,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                    decoration: BoxDecoration(
-                      color: white,
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/google.png",
-                          height: 28.0,
-                          width: 60.0,
-                        ),
-                        const Text(
-                          "Sign in with google",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: blackBG,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppDimensions.pHorizontal30,
                 ),
-                const SizedBox(height: 14),
-                // don't have an a account
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                decoration: BoxDecoration(
+                  color: blackTextFild,
+                  borderRadius: BorderRadius.circular(AppDimensions.radius20),
+                ),
+                child: Row(
                   children: [
-                    const Text(
-                      "Don't have an account? ",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: whiteText,
-                        fontWeight: FontWeight.w800,
+                    SizedBox(
+                      width: AppDimensions.width320,
+                      child: TextFormField(
+                        controller: _userController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Username",
+                          hintStyle: TextStyle(
+                            fontSize: AppDimensions.fontSize18,
+                            color: grayText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: TextStyle(
+                          fontSize: AppDimensions.fontSize18,
+                          color: whiteText,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        // sign up page
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const SignUpScreen();
-                            },
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        " Sign Up",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: blueText,
-                          fontWeight: FontWeight.w800,
-                        ),
+                    SvgPicture.asset(
+                      "assets/icons/user.svg",
+                      height: AppDimensions.height25,
+                      colorFilter: const ColorFilter.mode(
+                        grayText,
+                        BlendMode.srcIn,
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+
+              // password field
+              Container(
+                height: AppDimensions.height70,
+                margin: EdgeInsets.symmetric(
+                  horizontal: AppDimensions.pHorizontal20,
+                  vertical: AppDimensions.pVertical15,
+                ),
+                padding: EdgeInsets.symmetric(
+                    horizontal: AppDimensions.pHorizontal30),
+                decoration: BoxDecoration(
+                  color: blackTextFild,
+                  borderRadius: BorderRadius.circular(AppDimensions.radius20),
+                ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: AppDimensions.width320,
+                      child: TextFormField(
+                        controller: _passwordController,
+                        obscureText: !_isPasswordVisible,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Password",
+                          hintStyle: TextStyle(
+                            fontSize: AppDimensions.fontSize18,
+                            color: grayText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: TextStyle(
+                          fontSize: AppDimensions.fontSize18,
+                          color: whiteText,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                      child: !_isPasswordVisible
+                          ? SvgPicture.asset(
+                              "assets/icons/hide.svg",
+                              height: AppDimensions.height25,
+                              colorFilter: const ColorFilter.mode(
+                                grayText,
+                                BlendMode.srcIn,
+                              ),
+                            )
+                          : SvgPicture.asset(
+                              "assets/icons/visibility.svg",
+                              height: AppDimensions.height25,
+                              colorFilter: const ColorFilter.mode(
+                                grayText,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: AppDimensions.height10),
+
+              // forgot password
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.only(right: AppDimensions.width25),
+                  child: GestureDetector(
+                    onTap: () {
+                      // forgot password function
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (ctx) => const ForgotPasswordScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Forgot Password?",
+                      style: TextStyle(
+                        fontSize: AppDimensions.fontSize17,
+                        color: grayText,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: AppDimensions.height60),
+
+              // sign in button
+              GestureDetector(
+                onTap: () async {
+                  String output = await authenticationMethods.signInUser(
+                    userEmail: _userController.text,
+                    userPassword: _passwordController.text,
+                  );
+
+                  if (output == "success") {
+                    // doing next function
+                    log("login success");
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (ctx) => const BottomNavScreen(),
+                      ),
+                    );
+                  } else {
+                    final snackBar = SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.teal,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radius10),
+                      ),
+                      content: Text(
+                        output,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontSize: AppDimensions.fontSize17,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    );
+
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
+                },
+                child: Container(
+                  height: AppDimensions.height75,
+                  width: screenSize.width,
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(
+                      horizontal: AppDimensions.pHorizontal20),
+                  decoration: BoxDecoration(
+                    color: blueButton,
+                    borderRadius: BorderRadius.circular(AppDimensions.radius15),
+                  ),
+                  child: Text(
+                    "Sign in",
+                    style: TextStyle(
+                      fontSize: AppDimensions.fontSize18,
+                      color: whiteText,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: AppDimensions.height25),
+
+              // google sign in button
+              GestureDetector(
+                onTap: () async {
+                  await authenticationMethods.signInWithGoogle(context);
+                },
+                child: Container(
+                  height: AppDimensions.height75,
+                  width: screenSize.width,
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(
+                      horizontal: AppDimensions.pHorizontal20),
+                  decoration: BoxDecoration(
+                    color: white,
+                    borderRadius: BorderRadius.circular(AppDimensions.radius15),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/images/google.png",
+                        height: AppDimensions.height40,
+                        width: AppDimensions.width62,
+                      ),
+                      Text(
+                        "Sign in with Google",
+                        style: TextStyle(
+                          fontSize: AppDimensions.fontSize18,
+                          color: blackBG,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: AppDimensions.height90),
+
+              // don't have an a account
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account? ",
+                    style: TextStyle(
+                      fontSize: AppDimensions.fontSize18,
+                      color: whiteText,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      // sign up page
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const SignUpScreen();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(
+                      " Sign Up",
+                      style: TextStyle(
+                        fontSize: AppDimensions.fontSize18,
+                        color: blueText,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

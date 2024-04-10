@@ -23,9 +23,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -44,37 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBvnHqvKWSovJaeElqLYSlPirahBTZwRhE',
-    appId: '1:24608399396:web:f4f84b7b7c837be9b6f8b1',
-    messagingSenderId: '24608399396',
-    projectId: 'map-demo-a3416',
-    authDomain: 'map-demo-a3416.firebaseapp.com',
-    storageBucket: 'map-demo-a3416.appspot.com',
+    apiKey: 'AIzaSyBdY2keO2-2JNj0svbJ6At9UMZZ-TQTmHw',
+    appId: '1:275721686986:web:b01ad1490736e54f72c933',
+    messagingSenderId: '275721686986',
+    projectId: 'quiz-394d2',
+    authDomain: 'quiz-394d2.firebaseapp.com',
+    storageBucket: 'quiz-394d2.appspot.com',
+    measurementId: 'G-431R9WWMGY',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDhrePO9ygM7SGpK2YJQ6dReCfctgx-mt4',
-    appId: '1:24608399396:android:d6d7cdad694953bbb6f8b1',
-    messagingSenderId: '24608399396',
-    projectId: 'map-demo-a3416',
-    storageBucket: 'map-demo-a3416.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDnXz3mOpix0ZDXGt0IKvKYDN5QjHASOtQ',
-    appId: '1:24608399396:ios:9ccf51ede295c8a5b6f8b1',
-    messagingSenderId: '24608399396',
-    projectId: 'map-demo-a3416',
-    storageBucket: 'map-demo-a3416.appspot.com',
-    iosBundleId: 'com.example.quiz',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDnXz3mOpix0ZDXGt0IKvKYDN5QjHASOtQ',
-    appId: '1:24608399396:ios:c642a794370e26cab6f8b1',
-    messagingSenderId: '24608399396',
-    projectId: 'map-demo-a3416',
-    storageBucket: 'map-demo-a3416.appspot.com',
-    iosBundleId: 'com.example.quiz.RunnerTests',
+    apiKey: 'AIzaSyCGlNZcXuVgI0q1-MyBq_FV0MRz-rt2fCU',
+    appId: '1:275721686986:android:5a198cab868e2f0f72c933',
+    messagingSenderId: '275721686986',
+    projectId: 'quiz-394d2',
+    storageBucket: 'quiz-394d2.appspot.com',
   );
 }

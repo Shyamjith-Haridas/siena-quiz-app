@@ -8,6 +8,7 @@ class CloudFireStoreClass {
   Future<void> uploadUserDataToDatabase({
     required String userName,
     required String userEmail,
+    required String userPassword,
   }) async {
     firebaseFirestore
         .collection("usersdata")
@@ -16,6 +17,7 @@ class CloudFireStoreClass {
       {
         "username": userName,
         "email": userEmail,
+        "password": userPassword,
       },
     );
   }

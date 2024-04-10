@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:quiz/resources/authentication_methods.dart';
 import 'package:quiz/screens/user_account/login_screen.dart';
 import 'package:quiz/screens/user_account/sign_up.dart';
+import 'package:quiz/utils/app_dimensions.dart';
 
 import '../../utils/colors.dart';
 
@@ -28,65 +29,65 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final mediaquery = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: blackBG,
       body: SizedBox(
-        height: mediaquery.height,
-        width: mediaquery.width,
+        height: AppDimensions.screenHeight,
+        width: AppDimensions.screenWidth,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 100.0),
+            padding: EdgeInsets.only(top: AppDimensions.height120),
             child: Column(
               children: [
-                const Text(
+                Text(
                   "Password Recovery !",
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: AppDimensions.fontSize35,
                     color: whiteText,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-                const SizedBox(height: 10),
-                const Text(
+                SizedBox(height: AppDimensions.height10),
+                Text(
                   "Enter your email",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: AppDimensions.fontSize18,
                     color: whiteText,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 50),
+                SizedBox(height: AppDimensions.height50),
                 // email field
                 Container(
-                  height: 70.0,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 10.0,
+                  height: AppDimensions.height70,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: AppDimensions.pHorizontal20,
+                    vertical: AppDimensions.pVertical10,
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: AppDimensions.pHorizontal30),
                   decoration: BoxDecoration(
                     color: blackTextFild,
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(AppDimensions.radius20),
                   ),
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 270.0,
+                        width: AppDimensions.width320,
                         child: TextFormField(
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Username",
                             hintStyle: TextStyle(
-                              fontSize: 14,
+                              fontSize: AppDimensions.fontSize18,
                               color: grayText,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          style: const TextStyle(
-                            fontSize: 14,
+                          style: TextStyle(
+                            fontSize: AppDimensions.fontSize18,
                             color: whiteText,
                             fontWeight: FontWeight.w600,
                           ),
@@ -94,7 +95,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       ),
                       SvgPicture.asset(
                         "assets/icons/user.svg",
-                        height: 20.0,
+                        height: AppDimensions.height25,
                         colorFilter: const ColorFilter.mode(
                           grayText,
                           BlendMode.srcIn,
@@ -103,7 +104,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: AppDimensions.height10),
                 GestureDetector(
                   onTap: () async {
                     // sign in function
@@ -132,11 +133,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     if (output == "success") {
                       final snackBar = SnackBar(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radius10),
                         ),
                         backgroundColor: Colors.teal,
                         behavior: SnackBarBehavior.floating,
-                        content: const Text("Reset link has been sent"),
+                        content: Text(
+                          "Reset link has been sent",
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontSize: AppDimensions.fontSize17,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                        ),
                       );
 
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -150,43 +159,53 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     } else {
                       final snackBar = SnackBar(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radius10),
                         ),
                         backgroundColor: Colors.teal,
                         behavior: SnackBarBehavior.floating,
-                        content: Text(output),
+                        content: Text(
+                          output,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontSize: AppDimensions.fontSize17,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                        ),
                       );
 
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                   },
                   child: Container(
-                    height: 70.0,
-                    width: mediaquery.width,
+                    height: AppDimensions.height70,
+                    width: AppDimensions.screenWidth,
                     alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: AppDimensions.pHorizontal20),
                     decoration: BoxDecoration(
                       color: blueButton,
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radius20),
                     ),
-                    child: const Text(
+                    child: Text(
                       "Send Email",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: AppDimensions.fontSize18,
                         color: whiteText,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 25),
+                SizedBox(height: AppDimensions.height25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       "Don't have an account? ",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: AppDimensions.fontSize18,
                         color: whiteText,
                         fontWeight: FontWeight.w800,
                       ),
@@ -202,10 +221,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           ),
                         );
                       },
-                      child: const Text(
+                      child: Text(
                         " Create",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: AppDimensions.fontSize18,
                           color: blueText,
                           fontWeight: FontWeight.w800,
                         ),

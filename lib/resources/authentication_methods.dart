@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/resources/user_data_cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:quiz/screens/home/home_screen.dart';
+import 'package:quiz/bottom_nav.dart';
 
 class AuthenticationMethods {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -19,14 +19,19 @@ class AuthenticationMethods {
     required String userName,
     required String userEmail,
     required String userPassword,
+    required String confirmPassword,
   }) async {
     userName.trim();
     userEmail.trim();
     userPassword.trim();
+    confirmPassword.trim();
 
     String output = "something went wrong";
 
-    if (userName != "" && userEmail != "" && userPassword != "") {
+    if (userName != "" &&
+        userEmail != "" &&
+        userPassword != "" &&
+        confirmPassword != "") {
       try {
         await firebaseAuth.createUserWithEmailAndPassword(
           email: userEmail,
@@ -37,6 +42,7 @@ class AuthenticationMethods {
         await cloudFireStoreClass.uploadUserDataToDatabase(
           userName: userName,
           userEmail: userEmail,
+          userPassword: userPassword,
         );
 
         output = "success";
@@ -115,7 +121,7 @@ class AuthenticationMethods {
 
         if (signInResult != null) {
           firebaseFirestore
-              .collection("userdata")
+              .collection("userdata_google")
               .doc(firebaseAuth.currentUser!.uid)
               .set(
             {
@@ -132,7 +138,7 @@ class AuthenticationMethods {
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (ctx) => const QuizHomeScreen(),
+            builder: (ctx) => const BottomNavScreen(),
           ),
         );
       } else {}
