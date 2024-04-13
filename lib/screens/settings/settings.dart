@@ -1,134 +1,245 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:quiz/screens/home/widget/community_container.dart';
-import 'package:quiz/screens/home/widget/settings_container.dart';
+import 'package:quiz/screens/user_account/login_screen.dart';
+import 'package:quiz/utils/app_dimensions.dart';
+
+import 'swidgets/settings_container_row.dart';
 
 class QuizAppSettingsScreen extends StatelessWidget {
   const QuizAppSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: SizedBox(
-          height: screenSize.height,
-          width: screenSize.width,
-          child: Stack(
+    return Scaffold(
+      //backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SizedBox(
+          height: AppDimensions.screenHeight,
+          width: AppDimensions.screenWidth,
+          child: Column(
             children: [
+              SizedBox(height: 20),
               Container(
-                height: screenSize.height,
-                width: screenSize.width,
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                ),
+                height: 100,
+                margin: EdgeInsets.all(30),
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(49, 49, 77, 1),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  children: [
+                    LottieBuilder.asset("assets/animations/premium.json"),
+                    SizedBox(width: 20),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Go Premium!",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                        Text(
+                          "Unlock All Questions!",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                fontSize: 17,
+                                color: Colors.grey,
+                              ),
+                        )
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 600,
-                  width: screenSize.width,
-                  padding: const EdgeInsets.only(
-                    left: 20.0,
-                    right: 20.0,
-                    top: 40.0,
-                  ),
-                  decoration: BoxDecoration(
-                    //color: Color.fromRGBO(240, 235, 229, 1),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 30),
-                      Text(
-                        "Study Settings",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      StudySettingsContainer(
-                        title: "Difficulty",
-                        type: "Easy",
-                      ),
-                      const SizedBox(height: 10),
-                      StudySettingsContainer(
-                        title: "Daily Goal",
-                        type: "20 qtsn",
-                      ),
-                      const SizedBox(height: 10),
-                      StudySettingsContainer(
-                        title: "Score Goal",
-                        type: "80%",
-                      ),
-                      const SizedBox(height: 20),
 
-                      // community
+              // settings
+              Container(
+                height: 200,
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black26,
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SettingsContainerRow(
+                      leadingIconUrl: "assets/icons/premium.png",
+                      settingsText: "Premium",
+                      trailingIcon: Icons.arrow_forward_ios,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50),
+                      child: Divider(
+                        height: 1,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    SettingsContainerRow(
+                      leadingIconUrl: "assets/icons/daily_questions.png",
+                      settingsText: "Daily Questions",
+                      trailingText: "20",
+                      trailingIcon: Icons.arrow_forward_ios,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50),
+                      child: Divider(
+                        height: 1,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    SettingsContainerRow(
+                      leadingIconUrl: "assets/icons/score_goal.png",
+                      settingsText: "Score Goal",
+                      trailingText: "80%",
+                      trailingIcon: Icons.arrow_forward_ios,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30),
+
+              // rate us
+              Container(
+                height: 140,
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black26,
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SettingsContainerRow(
+                      leadingIconUrl: "assets/icons/rate_us.png",
+                      settingsText: "Rate us",
+                      trailingIcon: Icons.arrow_forward_ios,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50),
+                      child: Divider(
+                        height: 1,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    SettingsContainerRow(
+                      leadingIconUrl: "assets/icons/share.png",
+                      settingsText: "Share with a friend",
+                      trailingIcon: Icons.arrow_forward_ios,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30),
+
+              // reset progress
+              Container(
+                height: 70,
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.black26,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/icons/round_arrow.png",
+                      height: 25,
+                      width: 25,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "Reset Progress",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
+                    ),
+                    Spacer(),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 15,
+                    ),
+                  ],
+                ),
+              ),
+
+              // sign out
+              SizedBox(height: 30),
+
+              // reset progress
+              GestureDetector(
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (ctx) => const LoginScreen(),
+                      ),
+                      (route) => false);
+                },
+                child: Container(
+                  height: 70,
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.black26,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        "assets/icons/logout.png",
+                        height: 40,
+                        width: 40,
+                      ),
+                      SizedBox(width: 10),
                       Text(
-                        "Community",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      // CommunityContainer(
-                      //   containerColor: Colors.yellow,
-                      //   mainTitle: "Rate Us",
-                      //   subTitle: "your rating help us to improve!",
-                      //   imageUrl: "assets/icons/star.png",
-                      // ),
-                      // const SizedBox(height: 10),
-                      CommunityContainer(
-                        containerColor: Colors.blue.shade600,
-                        mainTitle: "Share ",
-                        subTitle: "Link to app store",
-                        imageUrl: "assets/icons/paper_plane.png",
-                      ),
-                      const SizedBox(height: 40),
-                      Container(
-                        height: 60,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(226, 110, 81, 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Reset Progress",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w900,
-                              ),
+                        "Sign Out",
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
                             ),
-                            Image.asset(
-                              "assets/icons/round_arrow.png",
-                              height: 30,
-                              width: 30,
-                            )
-                          ],
-                        ),
-                      )
+                      ),
+                      Spacer(),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      ),
                     ],
                   ),
                 ),
-              ),
-              Positioned(
-                top: 100,
-                left: 35,
-                child: Lottie.asset("assets/animations/premium.json"),
               ),
             ],
           ),

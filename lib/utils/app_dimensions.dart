@@ -7,6 +7,7 @@ class AppDimensions {
   // height
   static double height10 = screenHeight / 94.9;
   static double height12 = screenHeight / 79.08;
+  static double height15 = screenHeight / 63.26;
   static double height20 = screenHeight / 47.45;
   static double height25 = screenHeight / 37.96;
   static double height40 = screenHeight / 23.72;
@@ -18,19 +19,31 @@ class AppDimensions {
   static double height90 = screenHeight / 10.54;
   static double height100 = screenHeight / 9.49;
   static double height120 = screenHeight / 7.90;
+  static double height350 = screenHeight / 2.71;
 
   // width
+  static double width20 = screenWidth / 22.4;
   static double width25 = screenWidth / 17.92;
+  static double width55 = screenWidth / 8.14;
   static double width62 = screenWidth / 7.22;
+  static double width280 = screenWidth / 1.6;
   static double width320 = screenWidth / 1.4;
 
   // font size
   static double fontSize17 = screenHeight / 55.82;
   static double fontSize18 = screenHeight / 52.72;
+  static double fontSize20 = screenHeight / 47.45;
+  static double fontSize22 = screenHeight / 43.14;
+  static double fontSize28 = screenHeight / 33.89;
   static double fontSize35 = screenHeight / 27.11;
   static double fontSize40 = screenHeight / 23.72;
 
   // padding
+  static double padding10 = screenHeight / 94.9;
+  static double padding20 = screenHeight / 47.45;
+  static double padding25 = screenHeight / 37.96;
+
+  // padding - horizontal and vertical
   static double pVertical10 = screenHeight / 94.9;
   static double pVertical15 = screenHeight / 63.26;
   static double pHorizontal20 = screenWidth / 22.4;
@@ -41,27 +54,3 @@ class AppDimensions {
   static double radius15 = screenHeight / 63.26;
   static double radius20 = screenHeight / 47.45;
 }
-
-/*
-10 - 0.010
-
-18 - 0.019
-
-19 - 0.020
-
-20 - 0.021
-
-25 - 0.026
-
-40 - 0.042
-
-70 - 0.074
-
-75 - 0.079
-
-80 - 0.084
-
-90 - 0.095
-
-320 - 0.038
-*/

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/screens/home/home_screen.dart';
-import 'package:quiz/screens/profile/profile.dart';
 import 'package:quiz/screens/quiz_status/quiz_stats.dart';
 import 'package:quiz/screens/settings/settings.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -19,7 +18,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     QuizHomeScreen(),
     QuizAppStatsScreen(),
     QuizAppSettingsScreen(),
-    QuizAppProfileScreen(),
   ];
 
   @override
@@ -34,9 +32,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           });
         },
         index: selectedIndex,
-        color: Colors.black,
-        backgroundColor: Colors.white,
-        //backgroundColor: Color.fromRGBO(240, 235, 229, 1),
+        color: Color.fromRGBO(49, 49, 77, 1),
+        backgroundColor: Color.fromRGBO(247, 246, 242, 1),
         animationDuration: Duration(milliseconds: 500),
         items: [
           Icon(
@@ -49,10 +46,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           ),
           Icon(
             Icons.settings,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.person,
             color: Colors.white,
           ),
         ],
