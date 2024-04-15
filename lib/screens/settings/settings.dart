@@ -12,26 +12,25 @@ class QuizAppSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white,
       body: SafeArea(
         child: SizedBox(
           height: AppDimensions.screenHeight,
           width: AppDimensions.screenWidth,
           child: Column(
             children: [
-              SizedBox(height: 20),
+              SizedBox(height: AppDimensions.height20),
               Container(
-                height: 100,
-                margin: EdgeInsets.all(30),
-                padding: EdgeInsets.all(10),
+                height: AppDimensions.height100,
+                margin: EdgeInsets.all(AppDimensions.height30),
+                padding: EdgeInsets.all(AppDimensions.height10),
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(49, 49, 77, 1),
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(AppDimensions.radius30),
                 ),
                 child: Row(
                   children: [
                     LottieBuilder.asset("assets/animations/premium.json"),
-                    SizedBox(width: 20),
+                    SizedBox(width: AppDimensions.width20),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +41,7 @@ class QuizAppSettingsScreen extends StatelessWidget {
                               .textTheme
                               .headlineSmall!
                               .copyWith(
-                                fontSize: 18,
+                                fontSize: AppDimensions.fontSize18,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -53,10 +52,10 @@ class QuizAppSettingsScreen extends StatelessWidget {
                               .textTheme
                               .headlineSmall!
                               .copyWith(
-                                fontSize: 17,
+                                fontSize: AppDimensions.fontSize17,
                                 color: Colors.grey,
                               ),
-                        )
+                        ),
                       ],
                     ),
                   ],
@@ -65,13 +64,14 @@ class QuizAppSettingsScreen extends StatelessWidget {
 
               // settings
               Container(
-                height: 200,
+                height: AppDimensions.height200,
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                padding: EdgeInsets.all(20),
+                margin:
+                    EdgeInsets.symmetric(horizontal: AppDimensions.height30),
+                padding: EdgeInsets.all(AppDimensions.padding20),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(AppDimensions.radius20),
                   border: Border.all(
                     color: Colors.black26,
                   ),
@@ -85,7 +85,7 @@ class QuizAppSettingsScreen extends StatelessWidget {
                       trailingIcon: Icons.arrow_forward_ios,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 50),
+                      padding: EdgeInsets.only(left: AppDimensions.height50),
                       child: Divider(
                         height: 1,
                         color: Colors.black54,
@@ -98,7 +98,7 @@ class QuizAppSettingsScreen extends StatelessWidget {
                       trailingIcon: Icons.arrow_forward_ios,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 50),
+                      padding: EdgeInsets.only(left: AppDimensions.height50),
                       child: Divider(
                         height: 1,
                         color: Colors.black54,
@@ -113,17 +113,18 @@ class QuizAppSettingsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: AppDimensions.height30),
 
               // rate us
               Container(
-                height: 140,
+                height: AppDimensions.height140,
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.symmetric(
+                    horizontal: AppDimensions.pHorizontal30),
+                padding: EdgeInsets.all(AppDimensions.padding20),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(AppDimensions.radius20),
                   border: Border.all(
                     color: Colors.black26,
                   ),
@@ -137,7 +138,7 @@ class QuizAppSettingsScreen extends StatelessWidget {
                       trailingIcon: Icons.arrow_forward_ios,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 50),
+                      padding: EdgeInsets.only(left: AppDimensions.height50),
                       child: Divider(
                         height: 1,
                         color: Colors.black54,
@@ -151,49 +152,49 @@ class QuizAppSettingsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: AppDimensions.height30),
 
               // reset progress
               Container(
-                height: 70,
+                height: AppDimensions.height70,
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.symmetric(
+                    horizontal: AppDimensions.pHorizontal30),
+                padding: EdgeInsets.all(AppDimensions.padding20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(
                     color: Colors.black26,
                   ),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(AppDimensions.radius10),
                 ),
                 child: Row(
                   children: [
                     Image.asset(
                       "assets/icons/round_arrow.png",
-                      height: 25,
-                      width: 25,
+                      height: AppDimensions.height25,
+                      width: AppDimensions.height25,
                     ),
-                    SizedBox(width: 10),
+                    SizedBox(width: AppDimensions.width10),
                     Text(
                       "Reset Progress",
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontSize: 20,
+                            fontSize: AppDimensions.fontSize20,
                             fontWeight: FontWeight.w700,
                           ),
                     ),
                     Spacer(),
                     Icon(
                       Icons.arrow_forward_ios,
-                      size: 15,
+                      size: AppDimensions.height15,
                     ),
                   ],
                 ),
               ),
 
-              // sign out
-              SizedBox(height: 30),
+              SizedBox(height: AppDimensions.height30),
 
-              // reset progress
+              // sign out
               GestureDetector(
                 onTap: () async {
                   await FirebaseAuth.instance.signOut();
@@ -206,36 +207,37 @@ class QuizAppSettingsScreen extends StatelessWidget {
                       (route) => false);
                 },
                 child: Container(
-                  height: 70,
+                  height: AppDimensions.height70,
                   width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 30),
-                  padding: EdgeInsets.all(20),
+                  margin: EdgeInsets.symmetric(
+                      horizontal: AppDimensions.pHorizontal30),
+                  padding: EdgeInsets.all(AppDimensions.padding20),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
                       color: Colors.black26,
                     ),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(AppDimensions.radius10),
                   ),
                   child: Row(
                     children: [
                       Image.asset(
                         "assets/icons/logout.png",
-                        height: 40,
-                        width: 40,
+                        height: AppDimensions.height40,
+                        width: AppDimensions.height40,
                       ),
-                      SizedBox(width: 10),
+                      SizedBox(width: AppDimensions.width10),
                       Text(
                         "Sign Out",
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontSize: 20,
+                              fontSize: AppDimensions.fontSize20,
                               fontWeight: FontWeight.w900,
                             ),
                       ),
                       Spacer(),
                       Icon(
                         Icons.arrow_forward_ios,
-                        size: 15,
+                        size: AppDimensions.height15,
                       ),
                     ],
                   ),

@@ -31,7 +31,7 @@ class _QuizSplashScreenState extends State<QuizSplashScreen>
   }
 
   Widget checkUserLoggedinOrNot() {
-    return StreamBuilder(
+    return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, AsyncSnapshot<User?> user) {
         if (user.connectionState == ConnectionState.waiting) {

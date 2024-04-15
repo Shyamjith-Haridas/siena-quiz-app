@@ -25,18 +25,18 @@ class _ChooseLevelScreenState extends State<ChooseLevelScreen> {
         width: AppDimensions.screenWidth,
         child: Column(
           children: [
-            SizedBox(height: 20),
+            SizedBox(height: AppDimensions.height20),
             Text(
               "Sport",
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     fontWeight: FontWeight.w800,
-                    fontSize: 25,
+                    fontSize: AppDimensions.fontSize25,
                   ),
             ),
             Image.asset("assets/images/quiz_category_image/sports.jpg"),
-            SizedBox(height: 10),
+            SizedBox(height: AppDimensions.height10),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(AppDimensions.padding20),
               child: SizedBox(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,12 +47,12 @@ class _ChooseLevelScreenState extends State<ChooseLevelScreen> {
                         "Choose your level",
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                               color: Colors.grey,
-                              fontSize: 18,
+                              fontSize: AppDimensions.fontSize18,
                               fontWeight: FontWeight.w600,
                             ),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: AppDimensions.height15),
                     GestureDetector(
                       onTap: () {
                         log("message");
@@ -77,11 +77,12 @@ class _ChooseLevelScreenState extends State<ChooseLevelScreen> {
                         );
                       },
                       child: Container(
-                        height: 65,
+                        height: AppDimensions.height65,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: containerColor,
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radius30),
                           border: Border.all(
                             color: Colors.black45,
                           ),
@@ -90,7 +91,7 @@ class _ChooseLevelScreenState extends State<ChooseLevelScreen> {
                           child: Text(
                             "Easy",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: AppDimensions.fontSize18,
                               color: textColor,
                               fontWeight: FontWeight.w800,
                             ),
@@ -98,13 +99,14 @@ class _ChooseLevelScreenState extends State<ChooseLevelScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: AppDimensions.height15),
                     Container(
-                      height: 65,
+                      height: AppDimensions.height65,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radius30),
                         border: Border.all(
                           color: Colors.black45,
                         ),
@@ -113,18 +115,19 @@ class _ChooseLevelScreenState extends State<ChooseLevelScreen> {
                         child: Text(
                           "Medium",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: AppDimensions.fontSize18,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: AppDimensions.height15),
                     Container(
-                      height: 65,
+                      height: AppDimensions.height65,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radius30),
                         border: Border.all(
                           color: Colors.black45,
                         ),
@@ -133,7 +136,7 @@ class _ChooseLevelScreenState extends State<ChooseLevelScreen> {
                         child: Text(
                           "Hard",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: AppDimensions.fontSize18,
                             fontWeight: FontWeight.w800,
                           ),
                         ),

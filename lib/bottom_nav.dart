@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:quiz/screens/home/home_screen.dart';
 import 'package:quiz/screens/quiz_status/quiz_stats.dart';
 import 'package:quiz/screens/settings/settings.dart';
@@ -53,3 +55,36 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     );
   }
 }
+
+
+ // bottomNavigationBar: BottomNavigationBar(
+      //   backgroundColor: Color.fromRGBO(49, 49, 77, 1),
+      //   // backgroundColor: Colors.white,
+      //   // // selectedItemColor: Color.fromRGBO(49, 49, 77, 1),
+      //   selectedItemColor: Colors.white,
+      //   // selectedItemColor: Color.fromRGBO(49, 49, 77, 1),
+      //   selectedFontSize: 16,
+      //   selectedLabelStyle: TextStyle(
+      //     fontWeight: FontWeight.w800,
+      //   ),
+      //   currentIndex: selectedIndex,
+      //   onTap: (newIndex) {
+      //     setState(() {
+      //       selectedIndex = newIndex;
+      //     });
+      //   },
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Iconsax.home),
+      //       label: "Home",
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Iconsax.status_up4),
+      //       label: "Stats",
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.settings),
+      //       label: "Settings",
+      //     ),
+      //   ],
+      // ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/utils/app_dimensions.dart';
 
 class SettingsContainerRow extends StatelessWidget {
   const SettingsContainerRow({
@@ -20,14 +21,14 @@ class SettingsContainerRow extends StatelessWidget {
       children: [
         Image.asset(
           leadingIconUrl,
-          height: 45,
-          width: 45,
+          height: AppDimensions.height45,
+          width: AppDimensions.width45,
         ),
-        SizedBox(width: 10),
+        SizedBox(width: AppDimensions.width10),
         Text(
           settingsText,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontSize: 20,
+                fontSize: AppDimensions.fontSize20,
                 fontWeight: FontWeight.w700,
               ),
         ),
@@ -35,14 +36,14 @@ class SettingsContainerRow extends StatelessWidget {
         Text(
           trailingText,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontSize: 20,
+                fontSize: AppDimensions.fontSize20,
                 fontWeight: FontWeight.w700,
               ),
         ),
-        SizedBox(width: 10),
+        SizedBox(width: AppDimensions.width10),
         Icon(
           trailingIcon,
-          size: 15,
+          size: AppDimensions.height15,
         ),
       ],
     );
